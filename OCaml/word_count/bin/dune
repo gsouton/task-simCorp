@@ -1,0 +1,4 @@
+(executable
+ (public_name word_count)
+ (name main)
+ (libraries word_count))
