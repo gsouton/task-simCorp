@@ -25,6 +25,7 @@ class Program {
 
     static void Main(string[] args) {
         string[] filePaths = ParseArguments(args);
+        // List<WordCounter> wordCounters = new List<WordCounter>();
         foreach (string filePath in filePaths) {
             try {
                 string[] fileContent = File.ReadAllLines(filePath);

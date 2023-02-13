@@ -4,9 +4,17 @@ using library;
 public class WordCounterTests {
     [Theory]
     [InlineData("")]
-    public void EmptyString(string line){
+    public void EmptyString(string line) {
         WordCounter wc = new WordCounter();
         wc.CountWords(line);
+        Assert.True(wc.Count == 0);
+    }
+
+    [Fact]
+    public void EmptyFile() {
+        WordCounter wc = new WordCounter();
+        string[] fileContent = new string[] { "", "", "", "" };
+        wc.CountWords(fileContent);
         Assert.True(wc.Count == 0);
     }
 
@@ -27,9 +35,9 @@ public class WordCounterTests {
     }
 
     [Fact]
-    public void CountTwoLines(){
+    public void CountTwoLines() {
         string line = "Hello World Good Bye World";
-        string[] lines = new string[]{line, line};
+        string[] lines = new string[] { line, line };
         Dictionary<string, uint> expected = new Dictionary<string, uint>();
         expected.Add("Hello", 2);
         expected.Add("World", 4);
