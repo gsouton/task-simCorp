@@ -1,2 +1,3 @@
 (test
- (name word_count))
+ (name test_word_count)
+ (libraries word_count ounit2))
