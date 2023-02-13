@@ -16,8 +16,8 @@ class Program {
         Console.WriteLine(wc);
     }
 
-    static void logTotal(List<WordCounter> wordCounters){
-        if(wordCounters.Count <= 1) return;
+    static void logTotal(List<WordCounter> wordCounters) {
+        if (wordCounters.Count <= 1) return;
         WordCounter totalCount = wordCounters[0];
         // TODO: Concatenate all the dictionaries to have the total from
         // all the files
@@ -25,11 +25,10 @@ class Program {
 
     static void Main(string[] args) {
         string[] filePaths = ParseArguments(args);
-        // List<WordCounter> wordCounters = new List<WordCounter>();
         foreach (string filePath in filePaths) {
             try {
-                string[] fileContent = File.ReadAllLines(filePath);
                 WordCounter wc = new WordCounter();
+                IEnumerable<string> fileContent = File.ReadLines(filePath);
                 wc.CountWords(fileContent);
                 logWordCounter(wc, filePath);
             }

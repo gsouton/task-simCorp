@@ -2,9 +2,18 @@
 public class WordCounter : Dictionary<string, uint> {
 
     public void CountWords(string[] lines){
+        if(lines.Count() == 0) return;
         foreach(string line in lines){
             CountWords(line);
         }
+    }
+
+    public void CountWords(IEnumerable<string> fileContent){
+        if(fileContent.Count() == 0) return;
+        foreach(string line in fileContent){
+            CountWords(line);
+        }
+
     }
 
     public void CountWords(string line) {

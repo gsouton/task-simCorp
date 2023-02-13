@@ -18,8 +18,7 @@ public class WordCounterTests {
         Assert.True(wc.Count == 0);
     }
 
-
-    [Fact]
+   [Fact]
     public void CountOneLine() {
         String line = "Hello World Good Bye World";
         Dictionary<string, uint> expected = new Dictionary<string, uint>();
