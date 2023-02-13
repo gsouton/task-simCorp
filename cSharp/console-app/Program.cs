@@ -1,41 +1,40 @@
-﻿namespace console_app;
+﻿using library;
+
+namespace console_app;
 class Program {
 
-    static string ParseArguments(string[] args) {
+    static string[] ParseArguments(string[] args) {
         if (args.Length == 0) {
-            Console.Error.WriteLine("Wrong use: word_count <file1> <file2> ... <file n>");
-            throw new ApplicationException();
+            Console.Error.WriteLine("Wrong use: word_count [file1, ...]");
+            Environment.Exit(1);
         }
-        return args[0];
+        return args;
+    }
+
+    static void logWordCounter(WordCounter wc, string title) {
+        Console.WriteLine($"--- {title} ---");
+        Console.WriteLine(wc);
+    }
+
+    static void logTotal(List<WordCounter> wordCounters){
+        if(wordCounters.Count <= 1) return;
+        WordCounter totalCount = wordCounters[0];
+        // TODO: Concatenate all the dictionaries to have the total from
+        // all the files
     }
 
     static void Main(string[] args) {
-
-
-        // TODO: refactor to the following
-        //
-        // string[] paths = ParseArguments(args);
-        // WordCounter wc = new WordCounter(paths);
-        // wc.Count();
-        // wc.LogCount();
-        //
-        string path = ParseArguments(args);
-        string[] fileContent = File.ReadAllLines(path);
-        Dictionary<string, uint> wordCount = new Dictionary<string, uint>();
-        foreach (string line in fileContent) {
-            string[] words = line.Split(" ");
-            foreach (string word in words) {
-                uint count;
-                if (wordCount.TryGetValue(word, out count)) {
-                    wordCount[word] = ++count;
-                }
-                else {
-                    wordCount.Add(word, 1);
-                }
+        string[] filePaths = ParseArguments(args);
+        foreach (string filePath in filePaths) {
+            try {
+                string[] fileContent = File.ReadAllLines(filePath);
+                WordCounter wc = new WordCounter();
+                wc.CountWords(fileContent);
+                logWordCounter(wc, filePath);
             }
-        }
-        foreach (var entry in wordCount) {
-            Console.WriteLine($"{entry.Key}: {entry.Value}");
+            catch (Exception e) {
+                Console.Error.WriteLine(e.Message);
+            }
         }
     }
 }
