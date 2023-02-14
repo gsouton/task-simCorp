@@ -29,6 +29,7 @@ let rec count_words_in_file in_channel (hash_table: (string, int) Hashtbl.t ref)
             close_in_noerr in_channel;
             hash_table
 
+(** Return a hash table with the count for each word in the file **)
 let count_words in_channel =
     let hash_table = ref (Hashtbl.create 32) in
         !(count_words_in_file in_channel hash_table)

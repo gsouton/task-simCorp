@@ -1,4 +1,31 @@
-# task-simCorp
+# Task
+Write a program (and prove that it works, we expect you to write automated tests) that: Given a text file, count the occurrence of each unique word in the file.
+
+For example; a file containing the string “Go do that thing that you do so well” should find these counts:
+
+1: Go
+
+2: do
+
+2: that
+
+1: thing
+
+1: you
+
+1: so
+
+1: well
+
+## Implementation
+This repository contains two implementation for the task, one in `OCaml` and the
+other in `C#`.
+
+Both implementations at the end provides an executable allowing you to count
+words in files 
+
+`word-count [file..]` 
+
 
 ## OCaml implementation
 

@@ -14,7 +14,7 @@ public class WordCounterTests {
     public void EmptyString(string line) {
         WordCounter wc = new WordCounter();
         wc.CountWords(line);
-        Assert.True(wc.Count == 0);
+        Assert.Empty(wc);
     }
 
     [Fact]
@@ -22,7 +22,7 @@ public class WordCounterTests {
         WordCounter wc = new WordCounter();
         string[] fileContent = new string[] { "", "", "", "" };
         wc.CountWords(fileContent);
-        Assert.True(wc.Count == 0);
+        Assert.Empty(wc);
     }
 
    [Fact]
@@ -35,6 +35,27 @@ public class WordCounterTests {
         expected.Add("Bye", 1);
 
         WordCounter wc = new WordCounter();
+        wc.CountWords(line);
+
+        Assert.Equal(expected, wc);
+
+    }
+
+   [Fact]
+    public void CountOneWhitespace() {
+        String line = "                          ";
+        WordCounter wc = new WordCounter();
+        wc.CountWords(line);
+
+        Assert.Empty(wc);
+    }
+
+   [Fact]
+    public void CountOneWordWithWhitespace() {
+        String line = "           Hello               ";
+        WordCounter wc = new WordCounter();
+        Dictionary<string, uint> expected = new Dictionary<string, uint>();
+        expected.Add("Hello", 1);
         wc.CountWords(line);
 
         Assert.Equal(expected, wc);
@@ -54,6 +75,17 @@ public class WordCounterTests {
         wc.CountWords(lines);
 
         Assert.Equal(expected, wc);
+    }
+
+    [Fact]
+    public void CountOnWhitespace2() {
+        string line = "                          ";
+        string[] lines = new string[] { line, line };
+
+        WordCounter wc = new WordCounter();
+        wc.CountWords(lines);
+
+        Assert.Empty(wc);
     }
 
     [Fact]
@@ -108,7 +140,7 @@ public class WordCounterTests {
         IEnumerable<string> fileContent = File.ReadLines(example3);
         WordCounter wc = new WordCounter();
         wc.CountWords(fileContent);
-        Assert.Equal(wc.Count(), 0);
+        Assert.Empty(wc);
     }
 
     [Fact]
@@ -116,7 +148,7 @@ public class WordCounterTests {
         IEnumerable<string> fileContent = File.ReadLines(example4);
         WordCounter wc = new WordCounter();
         wc.CountWords(fileContent);
-        Assert.Equal(wc.Count(), 0);
+        Assert.Empty(wc);
     }
 
     [Fact]
