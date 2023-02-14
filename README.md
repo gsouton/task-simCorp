@@ -26,7 +26,6 @@ words in files
 
 `word-count [file..]` 
 
-
 ## OCaml implementation
 
 
@@ -47,7 +46,7 @@ OCaml
     │       
     └───lib
     │   │   dune
-    │   │   stringUtils.ml // functions to count words from line in a file
+    │   │   file.ml // functions to count words from a file
     │
     └───test
     │   │   dune
@@ -86,7 +85,7 @@ cSharp
 │   │   Program.cs // parse argument and open file
 │       
 └───library
-│   │   WordCounter.cs // functions to count words from line in a file
+│   │   WordCounter.cs // functions to count words from a file
 │
 └───library-test
 │   │   WordCounterTests.cs

@@ -11,22 +11,22 @@ let test_simple _test_ctxt =
         Hashtbl.add expected_table "Hello" 1;
         Hashtbl.add expected_table "World" 1;
 
-        let table = Word_count.StringUtils.count_words_in_line "Hello World" (ref (Hashtbl.create 32)) in 
+        let table = Word_count.File.count_words_in_line "Hello World" (ref (Hashtbl.create 32)) in 
         assert_equal table expected_table
 
 let test_whitespace _test_ctxt = 
-    let table = Word_count.StringUtils.count_words_in_line "               " (ref (Hashtbl.create 32)) in 
+    let table = Word_count.File.count_words_in_line "               " (ref (Hashtbl.create 32)) in 
     assert_equal 0 (Hashtbl.length table)
 
 let test_whitespace_around_word _test_ctxt = 
-    let table = Word_count.StringUtils.count_words_in_line "       Hello         " (ref (Hashtbl.create 32)) in 
+    let table = Word_count.File.count_words_in_line "       Hello         " (ref (Hashtbl.create 32)) in 
         let expected_table = Hashtbl.create 32 in
             Hashtbl.add expected_table "Hello" 1;
 
     assert_equal expected_table table
 
 let test_empty _test_ctxt =
-    let table = Word_count.StringUtils.count_words_in_line "" (ref (Hashtbl.create 32)) in 
+    let table = Word_count.File.count_words_in_line "" (ref (Hashtbl.create 32)) in 
     assert_equal (Hashtbl.length table) 0
 
 let test_example1 _text_ctxt =
@@ -40,7 +40,7 @@ let test_example1 _text_ctxt =
         Hashtbl.add expected_table "well" 1;
         
         let in_channel = open_in example1 in
-            assert_equal expected_table (Word_count.StringUtils.count_words in_channel)
+            assert_equal expected_table (Word_count.File.count_words in_channel)
 
 let test_example2 _text_ctxt =
     let expected_table = Hashtbl.create 32 in
@@ -61,22 +61,22 @@ let test_example2 _text_ctxt =
         Hashtbl.add expected_table "you" 1;
         Hashtbl.add expected_table "?" 1;
         let in_channel = open_in example2 in
-            assert_equal expected_table (Word_count.StringUtils.count_words in_channel)
+            assert_equal expected_table (Word_count.File.count_words in_channel)
 
 let empty_file _test_ctxt =
     let in_channel = open_in example3 in
-        let table = (Word_count.StringUtils.count_words in_channel) in
+        let table = (Word_count.File.count_words in_channel) in
             assert_equal 0 (Hashtbl.length table)
 
 let empty_file2 _test_ctxt =
     let in_channel = open_in example4 in
-        let table = (Word_count.StringUtils.count_words in_channel) in
+        let table = (Word_count.File.count_words in_channel) in
             assert_equal 0 (Hashtbl.length table)
     
 
 let example5 _test_ctxt =
     let in_channel = open_in example5 in
-        let table = (Word_count.StringUtils.count_words in_channel) in
+        let table = (Word_count.File.count_words in_channel) in
             let expected_table = Hashtbl.create 32 in
                 Hashtbl.add expected_table "H" 1;
                 

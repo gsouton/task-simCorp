@@ -1,6 +1,7 @@
-let usage_msg = "word_count <file>"
+let usage_msg = "word_count [file...]"
 let input_files = ref []
 
+(** For parsing CLi see: https://ocaml.org/docs/cli-arguments**)
 let anonymous_input filename = input_files := filename :: !input_files
 let specification_list = []
 
@@ -12,7 +13,7 @@ let rec process_files (file_paths: string list ref) hash_tables =
         | [] -> hash_tables
         | (file_path::fs) -> 
                 let in_channel = open_in file_path in
-                    let hash_table = Word_count.StringUtils.count_words in_channel in
+                    let hash_table = Word_count.File.count_words in_channel in
                         process_files (ref fs) ((file_path, hash_table)::hash_tables)
 
 
