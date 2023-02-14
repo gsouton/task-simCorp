@@ -1,4 +1,5 @@
 open OUnit2
+(* open QCheck *)
 
 let example1 = "../../../../../examples/ex1"
 let example2 = "../../../../../examples/ex2"
@@ -94,6 +95,24 @@ let suite = "Test suite for word_count" >::: [
     "test_empty_file2" >:: empty_file2;
     "example5" >:: example5]
 
-let () = run_test_tt_main suite
+
+(* let prop_count_all_words =  *)
+(*     Test.make ~count:500 ~name:"Counting words count all words" *)
+(*     QCheck.(list string) *)
+(*     (fun file_content ->  *)
+(*         List.for_all (fun line -> *)
+(*             let hash_table = Word_count.File.count_words_in_line line (ref (Hashtbl.create 32)) in *)
+(*             let number_words = Hashtbl.fold (fun _key value acc -> acc + value) hash_table 0 in *)
+(*             let words = String.split_on_char ' ' line in *)
+(*             let trimmed_words = List.filter (fun l -> String.length l > 0) (List.map (fun w -> String.trim w) words) in *)
+(*             let expected_num_words = List.length trimmed_words in *)
+(*             number_words = expected_num_words *)
+(*         ) file_content *)
+(*     ) *)
+
+let () = 
+    run_test_tt_main suite; 
+    (* QCheck_runner.run_tests_main [prop_count_all_words]; *)
+        
 
 

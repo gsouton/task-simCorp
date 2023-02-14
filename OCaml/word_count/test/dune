@@ -1,3 +1,4 @@
-(test
- (name test_word_count)
- (libraries word_count ounit2))
+(tests
+ (names test_word_count test_word_count_prop)
+ (libraries word_count ounit2 qcheck))
+
