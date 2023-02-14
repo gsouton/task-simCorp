@@ -20,12 +20,14 @@ public class WordCounter : Dictionary<string, uint> {
         if(line.Length == 0) return;
         string[] words = line.Split(" ");
         foreach (string word in words) {
+            string trimmedWord = word.Trim();
+            if(trimmedWord.Length == 0) continue;
             uint count;
-            if (this.TryGetValue(word, out count)) {
-                this[word] = ++count;
+            if (this.TryGetValue(trimmedWord, out count)) {
+                this[trimmedWord] = ++count;
             }
             else {
-                this.Add(word, 1);
+                this.Add(trimmedWord, 1);
             }
         }
     }
