@@ -108,6 +108,9 @@ To have a release version you can also build using
 To run the tests:
 - `dotnet test test-library/test-library.csproj`
 
+or 
+- `dotnet test`
+
 Makfile alternative:
 - `make test`
 
